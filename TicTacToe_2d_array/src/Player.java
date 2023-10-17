@@ -1,17 +1,17 @@
 public class Player {
-    private char fieldValue;
     private String name;
+    private char fieldValue;
 
-    public Player(char fieldValue, String name) {
-        this.fieldValue = fieldValue;
+    public Player(String name, char fieldValue) {
         this.name = name;
-    }
-
-    public char getFieldValue() {
-        return fieldValue;
+        this.fieldValue = fieldValue;
     }
 
     public String getName() {
         return name;
+    }
+
+    public char getFieldValue() {
+        return fieldValue;
     }
 }

@@ -1,194 +1,175 @@
-import java.util.Scanner;
-
 public class GameBoard {
 
-    private char[][] board = new char[3][3];
-    private Player player1;
-    private Player player2;
-    private int turn = 1;
+    private char field1 = '1';
+    private char field2 = '2';
+    private char field3 = '3';
+    private char field4 = '4';
+    private char field5 = '5';
+    private char field6 = '6';
+    private char field7 = '7';
+    private char field8 = '8';
+    private char field9 = '9';
+    private UserInterface userInterface;
+    private boolean gameOver = false;
 
-    public GameBoard(Player player1, Player player2) {
-        this.player1 = player1;
-        this.player2 = player2;
-
-        initBoard();
+    /**
+     * Constructor for the GameBoard class
+     *
+     * @param userInterface The language object
+     */
+    public GameBoard(UserInterface userInterface) {
+        this.userInterface = userInterface;
     }
 
-    public void initBoard() {
-        int iteration = 1;
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[1].length; j++) {
-                board[i][j] = (char) ('0' + iteration);
-                iteration++;
-            }
-        }
-    }
-
-    boolean gameOver = false;
-
-    public void startGame() {
-        printBoard(board);
-
-        while (!gameOver) {
-            System.out.println("\nPlayer " + turn + ", please select your field:\n");
-            if (turn == 1) {
-                setField(player1);
-                if (isGameOver()) {
-                    handleGameOver(player1);
-                    break;
-                }
-                turn = 2;
-            } else {
-                setField(player2);
-                if (isGameOver()) {
-                    handleGameOver(player2);
-                    break;
-                }
-                turn = 1;
-            }
-
-            printBoard(board);
-        }
-    }
-
-    public void printBoard(char[][] board) {
-        System.out.println(" " + board[0][0] + " | " + board[0][1] + " | " + board[0][2] + " ");
+    /**
+     * Prints the current state of the game board
+     */
+    public void printBoard() {
+        System.out.println(" " + field1 + " | " + field2 + " | " + field3 + " ");
         System.out.println("---+---+---");
-        System.out.println(" " + board[1][0] + " | " + board[1][1] + " | " + board[1][2] + " ");
+        System.out.println(" " + field4 + " | " + field5 + " | " + field6 + " ");
         System.out.println("---+---+---");
-        System.out.println(" " + board[2][0] + " | " + board[2][1] + " | " + board[2][2] + " ");
+        System.out.println(" " + field7 + " | " + field8 + " | " + field9 + " ");
     }
 
+    /**
+     * Sets the field for the current player
+     *
+     * @param player The current player
+     */
     public void setField(Player player) {
-
-        Scanner scanner = new Scanner(System.in);
         boolean properInput = false;
 
         while (!properInput) {
-            if (scanner.hasNextInt()) {
-
-                switch (scanner.nextInt()) {
-                    case 1:
-                        if (board[0][0] == 'x' || board[0][0] == 'o') {
-                            System.out.println("This field is already taken, please select another one");
-                            break;
-                        }
-                        board[0][0] = player.getFieldValue();
-                        properInput = true;
+            switch (userInterface.getPlayerInput()) {
+                case 1:
+                    if (field1 == 'x' || field1 == 'o') {
+                        System.out.println(userInterface.printFieldOccupied());
                         break;
-                    case 2:
-                        if (board[0][1] == 'x' || board[0][1] == 'o') {
-                            System.out.println("This field is already taken, please select another one");
-                            break;
-                        }
-                        board[0][1] = player.getFieldValue();
-                        properInput = true;
+                    }
+                    field1 = player.getFieldValue();
+                    properInput = true;
+                    break;
+                case 2:
+                    if (field2 == 'x' || field2 == 'o') {
+                        System.out.println(userInterface.printFieldOccupied());
                         break;
-                    case 3:
-                        if (board[0][2] == 'x' || board[0][2] == 'o') {
-                            System.out.println("This field is already taken, please select another one");
-                            break;
-                        }
-                        board[0][2] = player.getFieldValue();
-                        properInput = true;
+                    }
+                    field2 = player.getFieldValue();
+                    properInput = true;
+                    break;
+                case 3:
+                    if (field3 == 'x' || field3 == 'o') {
+                        System.out.println(userInterface.printFieldOccupied());
                         break;
-                    case 4:
-                        if (board[1][0] == 'x' || board[1][0] == 'o') {
-                            System.out.println("This field is already taken, please select another one");
-                            break;
-                        }
-                        board[1][0] = player.getFieldValue();
-                        properInput = true;
+                    }
+                    field3 = player.getFieldValue();
+                    properInput = true;
+                    break;
+                case 4:
+                    if (field4 == 'x' || field4 == 'o') {
+                        System.out.println(userInterface.printFieldOccupied());
                         break;
-                    case 5:
-                        if (board[1][1] == 'x' || board[1][1] == 'o') {
-                            System.out.println("This field is already taken, please select another one");
-                            break;
-                        }
-                        board[1][1] = player.getFieldValue();
-                        properInput = true;
+                    }
+                    field4 = player.getFieldValue();
+                    properInput = true;
+                    break;
+                case 5:
+                    if (field5 == 'x' || field5 == 'o') {
+                        System.out.println(userInterface.printFieldOccupied());
                         break;
-                    case 6:
-                        if (board[1][2] == 'x' || board[1][2] == 'o') {
-                            System.out.println("This field is already taken, please select another one");
-                            break;
-                        }
-                        board[1][2] = player.getFieldValue();
-                        properInput = true;
+                    }
+                    field5 = player.getFieldValue();
+                    properInput = true;
+                    break;
+                case 6:
+                    if (field6 == 'x' || field6 == 'o') {
+                        System.out.println(userInterface.printFieldOccupied());
                         break;
-                    case 7:
-                        if (board[2][0] == 'x' || board[2][0] == 'o') {
-                            System.out.println("This field is already taken, please select another one");
-                            break;
-                        }
-                        board[2][0] = player.getFieldValue();
-                        properInput = true;
+                    }
+                    field6 = player.getFieldValue();
+                    properInput = true;
+                    break;
+                case 7:
+                    if (field7 == 'x' || field7 == 'o') {
+                        System.out.println(userInterface.printFieldOccupied());
                         break;
-                    case 8:
-                        if (board[2][1] == 'x' || board[2][1] == 'o') {
-                            System.out.println("This field is already taken, please select another one");
-                            break;
-                        }
-                        board[2][1] = player.getFieldValue();
-                        properInput = true;
+                    }
+                    field7 = player.getFieldValue();
+                    properInput = true;
+                    break;
+                case 8:
+                    if (field8 == 'x' || field8 == 'o') {
+                        System.out.println(userInterface.printFieldOccupied());
                         break;
-                    case 9:
-                        if (board[2][2] == 'x' || board[2][2] == 'o') {
-                            System.out.println("This field is already taken, please select another one");
-                            break;
-                        }
-                        board[2][2] = player.getFieldValue();
-                        properInput = true;
+                    }
+                    field8 = player.getFieldValue();
+                    properInput = true;
+                    break;
+                case 9:
+                    if (field9 == 'x' || field9 == 'o') {
+                        System.out.println(userInterface.printFieldOccupied());
                         break;
-                    default:
-                        System.out.println("Please enter a number between 1 and 9");
-                        break;
-                }
-            } else {
-                System.out.println("Please enter a number between 1 and 9");
-                scanner.next();
+                    }
+                    field9 = player.getFieldValue();
+                    properInput = true;
+                    break;
+                default:
+                    System.out.println(userInterface.printNotAllowedCharacter());
+                    break;
             }
         }
     }
 
-    public boolean isGameOver() {
+    /**
+     * Checks if the game is over
+     *
+     * @return boolean
+     */
+    public boolean validateWinner() {
         // Validate horizontally
-        if (board[0][0] == board[0][1] && board[0][1] == board[0][2])
+        if (field1 == field2 && field2 == field3)
             return true;
-        if (board[1][0] == board[1][1] && board[1][1] == board[1][2])
+        if (field4 == field5 && field5 == field6)
             return true;
-        if (board[2][0] == board[2][1] && board[2][1] == board[2][2])
+        if (field7 == field8 && field8 == field9)
             return true;
 
         // Validate vertically
-        if (board[0][0] == board[1][0] && board[1][0] == board[2][0])
+        if (field1 == field4 && field4 == field7)
             return true;
-        if (board[0][1] == board[1][1] && board[1][1] == board[2][1])
+        if (field2 == field5 && field5 == field8)
             return true;
-        if (board[0][2] == board[1][2] && board[1][2] == board[2][2])
+        if (field3 == field6 && field6 == field9)
             return true;
 
         // Validate diagonally
-        if (board[0][0] == board[1][1] && board[1][1] == board[2][2])
+        if (field1 == field5 && field5 == field9)
             return true;
-        if (board[0][2] == board[1][1] && board[1][1] == board[2][0])
-            return true;
-
-        // Validate draw
-        if (board[0][0] != '1' && board[0][1] != '2' && board[0][2] != '3' && board[1][0] != '4' && board[1][1] != '5' && board[1][2] != '6' && board[2][0] != '7' && board[2][1] != '8' && board[2][2] != '9')
+        if (field3 == field5 && field5 == field7)
             return true;
 
         return false;
     }
 
-    public void handleGameOver(Player player)
-    {
-        if (isGameOver()) {
-            System.out.println("Final board:");
-            printBoard(board);
-            System.out.println("\n" + player.getName() + " has won the game!");
-            gameOver = true;
-            printBoard(board);
-        }
+    public boolean validateDraw() {
+        // Validate draw
+        if (field1 != '1' && field2 != '2' && field3 != '3' && field4 != '4' && field5 != '5' && field6 != '6' && field7 != '7' && field8 != '8' && field9 != '9')
+            return true;
+        return false;
+    }
+
+    public void handleGameOver(Player player) {
+        if (validateWinner())
+            System.out.println(userInterface.printGameOverMessage(player.getName()));
+        else if (validateDraw())
+            System.out.println(userInterface.printDrawMessage());
+
+        printBoard();
+        gameOver = true;
+    }
+
+    public boolean getGameOver() {
+        return gameOver;
     }
 }
