@@ -84,7 +84,7 @@ public class UserInterface {
 
     public String printFieldOccupied() {
         if (currentLanguage.equals("English")) {
-            return "This field is already taken, please select another one";
+            return "This field is already taken, please select another one.";
         } else if (currentLanguage.equals("German")) {
             return "Dieses Feld ist bereits belegt, bitte wähle ein anderes";
         }
